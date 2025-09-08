@@ -180,34 +180,218 @@ Fetch vendors → Calls the GET /cloudvendor and GET /cloudvendor/{id} endpoints
 
 Below is the sample IIQ application.xml configuration already in place:
 
-    <Application name="CloudVendorAPI" type="Web Services">
-        <Attributes>
-            <Map>
-                <entry key="baseUrl" value="http://localhost:9090/cloudvendor"/>
-                <entry key="authType" value="none"/> <!-- Add Basic/Auth if needed -->
-                <entry key="responseFormat" value="json"/>
-            </Map>
-        </Attributes>
-
-    <ObjectType name="cloudVendor" displayName="Cloud Vendor" identityAttribute="vendorId">
-        <Attributes>
-            <Map>
-                <entry key="vendorId" value="$object.vendorId"/>
-                <entry key="vendorName" value="$object.vendorName"/>
-                <entry key="vendorAddress" value="$object.vendorAddress"/>
-                <entry key="vendorPhoneNumber" value="$object.vendorPhoneNumber"/>
-                <entry key="isDisabled" value="$object.isDisabled"/>
-            </Map>
-        </Attributes>
-
-        <Operation name="create" type="POST" url="$(baseUrl)"/>
-        <Operation name="update" type="PUT" url="$(baseUrl)"/>
-        <Operation name="disable" type="PUT" url="$(baseUrl)/disable"/>
-        <Operation name="delete" type="DELETE" url="$(baseUrl)/$(object.vendorId)"/>
-        <Operation name="get" type="GET" url="$(baseUrl)/$(object.vendorId)"/>
-        <Operation name="list" type="GET" url="$(baseUrl)"/>
-    </ObjectType>
+       <?xml version='1.0' encoding='UTF-8'?>
+    <!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+    <Application connector="sailpoint.connector.webservices.WebServicesConnector" created="1757264122792" featuresString="PROVISIONING, ENABLE, PASSWORD, AUTHENTICATE, UNLOCK" id="c0a8006b99241b2d8199251a93a80046" modified="1757265292393" name="Web application" profileClass="" significantModified="1757265292393" type="Web Services">
+      <Attributes>
+        <Map>
+          <entry key="acctAggregationEnd">
+            <value>
+              <Date>1757265292372</Date>
+            </value>
+          </entry>
+          <entry key="acctAggregationStart">
+            <value>
+              <Date>1757265292307</Date>
+            </value>
+          </entry>
+          <entry key="afterProvisioningRule"/>
+          <entry key="aggregationPartitioned">
+            <value>
+              <Boolean></Boolean>
+            </value>
+          </entry>
+          <entry key="aggregationType" value="account"/>
+          <entry key="authenticationMethod" value="No Auth"/>
+          <entry key="beforeProvisioningRule"/>
+          <entry key="clientCertAuthEnabled">
+            <value>
+              <Boolean></Boolean>
+            </value>
+          </entry>
+          <entry key="compositeDefinition"/>
+          <entry key="connectionParameters">
+            <value>
+              <List>
+                <Map>
+                  <entry key="afterRule" value="Acc_agg_after_rule"/>
+                  <entry key="beforeRule"/>
+                  <entry key="body">
+                    <value>
+                      <Map>
+                        <entry key="bodyFormData"/>
+                        <entry key="bodyFormat" value="raw"/>
+                        <entry key="jsonBody"/>
+                      </Map>
+                    </value>
+                  </entry>
+                  <entry key="contextUrl" value="/cloudvendor"/>
+                  <entry key="curlCommand"/>
+                  <entry key="curlEnabled">
+                    <value>
+                      <Boolean></Boolean>
+                    </value>
+                  </entry>
+                  <entry key="customAuthUrl"/>
+                  <entry key="header"/>
+                  <entry key="httpMethodType" value="GET"/>
+                  <entry key="operationType" value="Account Aggregation"/>
+                  <entry key="paginationSteps"/>
+                  <entry key="pagingInitialOffset">
+                    <value>
+                      <Integer>0</Integer>
+                    </value>
+                  </entry>
+                  <entry key="pagingSize">
+                    <value>
+                      <Integer>50</Integer>
+                    </value>
+                  </entry>
+                  <entry key="parentEndpointName"/>
+                  <entry key="resMappingObj"/>
+                  <entry key="rootPath"/>
+                  <entry key="sequenceNumberForEndpoint" value="1"/>
+                  <entry key="uniqueNameForEndPoint" value="Account aggregation"/>
+                  <entry key="xpathNamespaces"/>
+                </Map>
+                <Map>
+                  <entry key="afterRule" value="Acc_agg_after_rule"/>
+                  <entry key="beforeRule"/>
+                  <entry key="body">
+                    <value>
+                      <Map>
+                        <entry key="bodyFormData"/>
+                        <entry key="bodyFormat" value="raw"/>
+                        <entry key="jsonBody" value="{&#xD;&#xA;  &quot;vendorId&quot;: &quot;C5&quot;,&#xD;&#xA;  &quot;vendorName&quot;: &quot;Vendor two&quot;,&#xD;&#xA;  &quot;vendorAddress&quot;: &quot;Address two&quot;,&#xD;&#xA;  &quot;vendorPhoneNumber&quot;: &quot;two&quot;,&#xD;&#xA;  &quot;isDisabled&quot;: &quot;false&quot;&#xD;&#xA;}"/>
+                      </Map>
+                    </value>
+                  </entry>
+                  <entry key="contextUrl" value="/cloudvendor"/>
+                  <entry key="curlCommand"/>
+                  <entry key="curlEnabled">
+                    <value>
+                      <Boolean></Boolean>
+                    </value>
+                  </entry>
+                  <entry key="customAuthUrl"/>
+                  <entry key="header"/>
+                  <entry key="httpMethodType" value="GET"/>
+                  <entry key="operationType" value="Test Connection"/>
+                  <entry key="paginationSteps"/>
+                  <entry key="pagingInitialOffset">
+                    <value>
+                      <Integer>0</Integer>
+                    </value>
+                  </entry>
+                  <entry key="pagingSize">
+                    <value>
+                      <Integer>50</Integer>
+                    </value>
+                  </entry>
+                  <entry key="parentEndpointName"/>
+                  <entry key="resMappingObj"/>
+                  <entry key="responseCode"/>
+                  <entry key="rootPath"/>
+                  <entry key="sequenceNumberForEndpoint" value="2"/>
+                  <entry key="uniqueNameForEndPoint" value="Update"/>
+                  <entry key="xpathNamespaces"/>
+                </Map>
+              </List>
+            </value>
+          </entry>
+          <entry key="createAccountWithEntReq">
+            <value>
+              <Boolean></Boolean>
+            </value>
+          </entry>
+          <entry key="enableHasMore" value="true"/>
+          <entry key="enableStatus"/>
+          <entry key="encrypted" value="accesstoken,refresh_token,oauth_token_info,client_secret,private_key,private_key_password,clientCertificate,clientKeySpec,resourceOwnerPassword,custom_auth_token_info"/>
+          <entry key="fixedPlanMultivaluedAttribute" value="true"/>
+          <entry key="genericWebServiceBaseUrl" value="http://localhost:9090"/>
+          <entry key="httpCookieSpecsStandard" value="true"/>
+          <entry key="isGetObjectRequiredForPTA">
+            <value>
+              <Boolean>true</Boolean>
+            </value>
+          </entry>
+          <entry key="lastAggregationDate_account" value="2025-09-07T17:14:52Z"/>
+          <entry key="nativeChangeDetectionAttributeScope" value="entitlements"/>
+          <entry key="nativeChangeDetectionAttributes"/>
+          <entry key="nativeChangeDetectionEnabled">
+            <value>
+              <Boolean></Boolean>
+            </value>
+          </entry>
+          <entry key="nativeChangeDetectionOperations"/>
+          <entry key="oAuthJwtHeader">
+            <value>
+              <Map>
+                <entry key="alg" value="RS256"/>
+              </Map>
+            </value>
+          </entry>
+          <entry key="oAuthJwtPayload">
+            <value>
+              <Map>
+                <entry key="aud"/>
+                <entry key="exp" value="15f"/>
+                <entry key="iss"/>
+                <entry key="sub"/>
+              </Map>
+            </value>
+          </entry>
+          <entry key="private_key_to_update"/>
+          <entry key="saml_assertion_url"/>
+          <entry key="saml_request_body"/>
+          <entry key="sysDescriptions">
+            <value>
+              <Map>
+                <entry key="en_US"/>
+              </Map>
+            </value>
+          </entry>
+          <entry key="templateApplication" value="Web Services"/>
+          <entry key="throwProvAfterRuleException">
+            <value>
+              <Boolean>true</Boolean>
+            </value>
+          </entry>
+          <entry key="throwProvBeforeRuleException">
+            <value>
+              <Boolean>true</Boolean>
+            </value>
+          </entry>
+          <entry key="timeoutInSeconds"/>
+          <entry key="version" value="v2"/>
+        </Map>
+      </Attributes>
+      <Owner>
+        <Reference class="sailpoint.object.Identity" id="c0a8006b9924169881992437938e00ff" name="spadmin"/>
+      </Owner>
+      <Schemas>
+        <Schema created="1757264122795" displayAttribute="vendorName" groupAttribute="" id="c0a8006b99241b2d8199251a93ab0048" identityAttribute="vendorID" instanceAttribute="" modified="1757265271889" nativeObjectType="user" objectType="account" significantModified="1757265271889">
+          <AttributeDefinition name="vendorID" type="string">
+            <Description></Description>
+          </AttributeDefinition>
+          <AttributeDefinition name="vendorName" type="string">
+            <Description></Description>
+          </AttributeDefinition>
+          <AttributeDefinition name="vendorAddress" type="string">
+            <Description></Description>
+          </AttributeDefinition>
+          <AttributeDefinition name="vendorPhoneNumber" type="string">
+            <Description></Description>
+          </AttributeDefinition>
+          <AttributeDefinition name="isDisabled" type="string">
+            <Description></Description>
+          </AttributeDefinition>
+        </Schema>
+        <Schema created="1757264122795" descriptionAttribute="" displayAttribute="" id="c0a8006b99241b2d8199251a93ab0049" identityAttribute="" instanceAttribute="" modified="1757265271889" nativeObjectType="group" objectType="group" significantModified="1757265271889"/>
+      </Schemas>
+      <ApplicationScorecard created="1757264122792" id="c0a8006b99241b2d8199251a93a80047" modified="1757265271889" significantModified="1757265271889"/>
     </Application>
+
 
 
 With this integration, SailPoint IIQ directly provisions and manages Cloud Vendors through the APIs provided by this project.
